@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>login</title>
+	<title>Register</title>
 </head>
 <body>
 	
@@ -31,7 +31,7 @@
 			</tr>
 			<tr>
 				<td></td>
-				<td><input type="submit" name="submit" value="Login"></td>
+				<td><input type="submit" name="submit" value="Register"></td>
 			</tr>
 		</table>
 		<h1>Already registered?</h1>

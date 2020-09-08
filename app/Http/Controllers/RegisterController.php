@@ -12,7 +12,7 @@ class RegisterController extends Controller
     
     function index(){
 
-    	return view('register.index');
+    	return view('registration.index');
     }
 
     function register(Request $request){
@@ -24,6 +24,7 @@ class RegisterController extends Controller
         $user->uname        = $request->uname;
         $user->password     = $request->password;
         $user->save();
+        print_r($user);
        
         return redirect()->route('login');
     }
