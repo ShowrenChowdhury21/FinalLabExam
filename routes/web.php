@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,29 +14,25 @@
 */
 
 Route::get('/', function () {
-    return view('login.index');
+    return view('login');
 });
 
+Route::get('/login', 'logincontroller@index')->name('login.index');
+Route::post('/login', ['uses'=>'logincontroller@verify']);
 
-Route::get('/register', 'RegisterController@index')->name('register.index');
-Route::post('/register', 'RegisterController@register');
-Route::get('/login', 'LoginController@index')->name('login.index');
-Route::post('/login', ['uses'=>'LoginController@verify']);
-Route::get('/logout', ['as'=>'logout.index', 'uses'=>'logoutController@index']);
+Route::get('/adminhome', 'adminhomecontroller@index')->name('admin.index');
+Route::get('/adminhome/create', 'adminhomecontroller@create')->name('admin.create');
+Route::post('/adminhome/save', 'adminhomecontroller@store');
+Route::get('/adminhome/edit/{id}', 'adminhomecontroller@edit')->name('admin.edit');
+Route::post('/adminhome/edit/{id}', 'adminhomecontroller@update');
+Route::get('/adminhome/delete/{id}', 'adminhomecontroller@delete')->name('admin.delete');
 
+route::get('/employerhome','employeecontroller@index')->name('employer.index');
+Route::get('/employerhome/create', 'employeecontroller@create')->name('employer.create');
+Route::get('/employerhome/edit/{id}', 'employeecontroller@edit')->name('employer.edit');
+Route::get('/employerhome/delete/{id}', 'employeecontroller@delete')->name('employer.delete');
+Route::post('/employerhome/save', 'employeecontroller@store');
+Route::post('/employerhome/edit/{id}', 'employeecontroller@update');
 
-Route::middleware(['sess'])->group(function(){
-
-	Route::get('/xyz', 'HomeController@index')->name('home.index');
-
-	Route::group(['middleware'=>['type']], function(){
-		Route::get('/admin/create', 'HomeController@create')->name('home.create');
-		Route::post('/admin/create', 'HomeController@store');
-		Route::get('/admin/edit/{id}', 'HomeController@edit')->name('home.edit');
-		Route::post('/admin/edit/{id}', 'HomeController@update');
-		Route::get('/home/delete/{id}', 'HomeController@delete')->name('home.delete');
-		Route::post('/home/delete/{id}', 'HomeController@destroy');
-	});
-	
-});
-
+Route::get('/registration', 'registrationcontroller@index')->name('registration.index');
+Route::post('/registration', 'registrationcontroller@store');

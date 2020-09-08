@@ -1,28 +1,33 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\user;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
-class LoginController extends Controller
+class logincontroller extends Controller
 {
-    
     function index(){
-
-    	return view('login.index');
+      return view('login');
     }
 
-    function verify(Request $request){
-    	
-    	if($request->username == $request->password){
+    function verify(request $request){
+      $data = DB::table('users')
+                ->where('username', $request->username)
+                ->where('password', $request->password)
+                ->get();
+      if(count($data) > 0){
+        $request->session()->put('username', $request->username);
 
-            $request->session()->put('username', $request->username);
-
-    		return redirect('/admin');
-
-    	}else{
-            $request->session()->flash('msg', 'invalid username/password');
-            return redirect('/login');
+        if($data[0]->user_type == 'admin'){
+          $request->session()->put('type', "admin");
+          return redirect()->route('admin.index');
         }
+        else{
+          $request->session()->put('type', "employer");
+          return redirect()->route('employer.index');
+        }
+      }
     }
 }
