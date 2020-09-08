@@ -5,7 +5,7 @@
 </head>
 <body>
 	
-	<h1>login</h1>
+	<h1>Login</h1>
 	
 	<form method="post">
 		<table>
@@ -19,10 +19,11 @@
 			</tr>
 			<tr>
 				<td></td>
-				<td><input type="submit" name="submit" value="Submit"></td>
-				<td><input type="submit" name="Register" value="Register"></td>
+				<td><input type="submit" name="submit" value="Login"></td>
 			</tr>
 		</table>
+		<h1>Didn't register?</h1>
+		<input type="button" onclick="window.location='/register'" name = "register" id= "register" value="Register">
 	</form>
 </body>
 </html>

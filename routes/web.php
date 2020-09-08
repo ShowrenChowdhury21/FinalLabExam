@@ -15,8 +15,10 @@ Route::get('/', function () {
     return view('login.index');
 });
 
-Route::get('/login', 'LoginController@index')->name('login.index');
+
 Route::get('/register', 'RegisterController@index')->name('register.index');
+Route::get('/register', 'RegisterController@register');
+Route::get('/login', 'LoginController@index')->name('login.index');
 Route::post('/login', ['uses'=>'LoginController@verify']);
 Route::get('/logout', ['as'=>'logout.index', 'uses'=>'logoutController@index']);
 
